@@ -1,4 +1,4 @@
-package io.github.skyshayde.io.github.skyshayde.commands;
+package io.github.skyshayde.commands;
 
 import com.darichey.discord.Command;
 import com.darichey.discord.CommandListener;
@@ -15,7 +15,9 @@ import java.util.Map;
 public class Role {
     HashMap<String, String> roles = new HashMap<String, String>();
 
+
     public Role(EventDispatcher dispatcher, CommandRegistry registry) {
+
         roles.put("overwatch", "Overwatchers");
         roles.put("destiny", "Destineers");
         roles.put("terraria", "Terrarians");
