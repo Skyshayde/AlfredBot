@@ -21,6 +21,8 @@ dependencies {
     compile "com.github.austinv11:Discord4J:2.10.0"
     compile 'com.github.Discord4J-Addons:Commands4J:2.0'
     compile 'com.google.apis:google-api-services-compute:v1-rev171-1.23.0'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'com.hierynomus:sshj:0.24.0'
 }
 
 shadowJar {

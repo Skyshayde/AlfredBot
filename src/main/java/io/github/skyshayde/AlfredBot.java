@@ -1,14 +1,16 @@
 package io.github.skyshayde;
 
+import com.darichey.discord.CommandListener;
 import com.darichey.discord.CommandRegistry;
-import io.github.skyshayde.commands.Role;
+import io.github.skyshayde.commands.RoleCommand;
+import io.github.skyshayde.commands.ServerCommand;
+import org.slf4j.Logger;
+import sx.blah.discord.Discord4J;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
-import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.impl.obj.ReactionEmoji;
 import sx.blah.discord.util.DiscordException;
 
 
@@ -18,12 +20,22 @@ public class AlfredBot {
     public static EventDispatcher dispatcher;
     public static CommandRegistry registry;
 
+
     public static void main(String[] args) {
+
+        if (Discord4J.LOGGER instanceof Discord4J.Discord4JLogger) {
+            ((Discord4J.Discord4JLogger) Discord4J.LOGGER).setLevel(Discord4J.Discord4JLogger.Level.INFO);
+        }
+
         client = createClient(DISCORD_TOKEN);
         dispatcher = client.getDispatcher();
         registry = new CommandRegistry("!");
         dispatcher.registerListener(new AlfredBot());
-        Role role = new Role(dispatcher, registry);
+        RoleCommand role = new RoleCommand(dispatcher, registry);
+        ServerCommand server = new ServerCommand(dispatcher, registry);
+        dispatcher.registerListener(new CommandListener(registry));
+
+
     }
 
 
